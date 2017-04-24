@@ -39,7 +39,7 @@ public class ARDrone20MediaCodecDecoderCopy extends VideoDataDecoder {
     @Override
     public void run() {
 		
-        extractor = new MediaExtractor();
+        /*extractor = new MediaExtractor();
         try {
             final AssetFileDescriptor afd=context.getResources().openRawResourceFd(R.raw.test);
             extractor.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
@@ -137,7 +137,7 @@ public class ARDrone20MediaCodecDecoderCopy extends VideoDataDecoder {
 			decoder.release();
 			extractor.release();
 
-
+*/
     }
 
     @Override

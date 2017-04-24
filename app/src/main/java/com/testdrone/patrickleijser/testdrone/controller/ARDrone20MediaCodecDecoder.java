@@ -53,6 +53,7 @@ public class ARDrone20MediaCodecDecoder extends VideoDataDecoder {
 
 
 		InputStream fin = getDataReader().getDataStream();
+        long startMs = System.currentTimeMillis();
 
         //Configuring Media Decoder
         try {
@@ -61,7 +62,7 @@ public class ARDrone20MediaCodecDecoder extends VideoDataDecoder {
             throw new RuntimeException(e.getMessage());
         }
 
-        MediaFormat format = MediaFormat.createVideoFormat("video/avc", 640,360);
+        MediaFormat format = MediaFormat.createVideoFormat("video/avc", 720,1280);
 
         codec.configure(format, surface, null, 0);
         codec.start();
@@ -70,12 +71,9 @@ public class ARDrone20MediaCodecDecoder extends VideoDataDecoder {
         while(!Thread.interrupted())
         {
             int frameSize = 0;
-            byte[] frameData = new byte[8000];
-            int test = -1;
+            byte[] frameData = new byte[1572864];
             try {
-                test = fin.read(frameData);
-
-
+                fin.read(frameData);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -116,7 +114,7 @@ public class ARDrone20MediaCodecDecoder extends VideoDataDecoder {
                     ByteBuffer input = codec.getInputBuffer(inIndex);
                     input.clear();
                     input.put(SPSPPS);
-                    codec.queueInputBuffer(inIndex, 0, SPSPPS.length, 16, MediaCodec.BUFFER_FLAG_CODEC_CONFIG);
+                    codec.queueInputBuffer(inIndex, 0, SPSPPS.length, 32, MediaCodec.BUFFER_FLAG_CODEC_CONFIG);
                 }
             }
             /*Edit end*/
@@ -129,19 +127,20 @@ public class ARDrone20MediaCodecDecoder extends VideoDataDecoder {
                 //inputBuffer.put(data);
                 inputBuffer.put(data);
                 //codec.queueInputBuffer(inIndex, 0, data.length, 16, 0);
-                codec.queueInputBuffer(inIndex, 0, data.length, 16, 0);
+                codec.queueInputBuffer(inIndex, 0, data.length, 32, 0);
             }
 
             MediaCodec.BufferInfo buffInfo = new MediaCodec.BufferInfo();
             int outIndex = codec.dequeueOutputBuffer(buffInfo, 10000);
 
+            Log.d("MediaCodec", "OutIndex: " + outIndex);
             switch(outIndex)
             {
                 case MediaCodec.INFO_OUTPUT_FORMAT_CHANGED:
                     break;
                 case MediaCodec.INFO_TRY_AGAIN_LATER:
                     break;
-                case -3: //This solves it
+                case MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED:
                     break;
                 default:
                     ByteBuffer buffer = codec.getOutputBuffer(outIndex);
