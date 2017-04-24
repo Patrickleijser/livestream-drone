@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+    <TableLayout
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+	
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/state_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:text="@string/drone_state"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_state"
+            android:textColor="#FF0000"
+            android:textStyle="bold" />
+    </TableRow>
+    
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/usb_joystick_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:text="@string/usb_joystick_state"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/joystick_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_state"
+            android:textColor="#FF0000"
+            android:textStyle="bold" />
+    </TableRow>
+    
+    </TableLayout>
+    
+
+    <FrameLayout
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="0dp"
+        android:layout_gravity="top"
+        android:layout_weight=".8"
+        android:paddingBottom="5dp" >
+    
+     <ImageView
+            android:id="@+id/display"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/display_desc"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ardrone_front" />
+     
+      <ImageView
+            android:id="@+id/ps3image"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="true"
+            android:visibility="invisible"
+            android:contentDescription="@string/display_desc"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sixaxis_controller_decription_portrait" />
+      
+       <ImageView
+            android:id="@+id/ps3imagesmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/display_desc"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sixaxis_controller_decription_portrait_smal" 
+            android:layout_gravity="top|right"/>
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/takeOffOrland"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:text="@string/btn_take_off"
+        android:visibility="visible" />
+    
+    <LinearLayout
+        android:id="@+id/bootomButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="bottom"
+        android:weightSum="1.0">
+       
+	    <Button
+	        android:id="@+id/connect"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".5"
+	        android:text="@string/btn_connect" />
+	
+	    <Button
+	        android:id="@+id/ps3Button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".5"
+	        android:text="@string/btn_connect_ps3" />
+    
+     </LinearLayout>
+    
+    </LinearLayout>
