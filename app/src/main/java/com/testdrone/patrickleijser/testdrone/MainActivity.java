@@ -243,7 +243,7 @@ public class MainActivity extends Activity implements DroneVideoListener, OnShar
         SurfaceHolder surfaceHolder = surfaceView.getHolder();
         Surface surface = surfaceHolder.getSurface();
 
-        drone.setExternalVideoDataDecoder(new ARDrone20MediaCodecDecoder(drone, surface, this));
+        drone.setExternalVideoDataDecoder(new ARDrone20MediaCodecDecoder(drone, surface));
     }
     
     private void droneOnConnected() {
